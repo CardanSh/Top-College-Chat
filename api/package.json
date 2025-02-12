@@ -1,0 +1,16 @@
+{
+  "name": "top-chat-api",
+  "version": "1.0.0",
+  "description": "Проект чата для колледжа Top",
+  "main": "./src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./src/index.js",
+    "prod": "nodemon -L ./src/inex.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
