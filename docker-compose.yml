@@ -6,4 +6,41 @@ services:
     ports:      
       - '4000:4000'    
     volumes:     
-      - ./api:/app      
+      - ./api:/app   
+  mysql:
+    image: mysql:8
+    container_name: api_mysql
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: qwerty
+      MYSQL_DATABASE: chat_rpo
+      MYSQL_USER: rpo_3
+      MYSQL_PASSWORD: qwerty
+    volumes:
+      - "./_DB:/varlib/mysql"
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: api_pma
+    restart: always
+    ports: 
+      - "8080:80"
+    environment:
+      PMA_HOST: mysql
+      MYSQL_ROOT_PASSWORD: qwerty
+  nginx:
+    image: nginx
+    container_name: api_entrypoint
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      TZ: "Asia/Yekaterinburg"
+    volumes:
+      - "./nginx/conf.d:/etc/nginx/conf.d"
+      - "./nginx/ssl:/etc/nginx/ssl"
+      - "./nginx/well-known:/usr/share/nginx/html"
+      - "./nginx/letsencrypt:/etc/letsencrypt"
+    
